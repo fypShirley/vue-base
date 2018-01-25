@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>4.Template</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <h1>4.Template</h1>
+        <hr>
+
+       
+       <div id="app"> 
+            {{count}}
+            <p>
+                <button @click="add">add</button>
+            </p>
+       </div>
+       
+       <template id="demo2">
+            <h1 style="color:rgb(217, 173, 230)">我是template模板</h1>
+       </template>
+
+       <script type="x-template" id="demo3">
+            <h1 style="color:rgb(217, 173, 230)">我是javascript模板</h1>
+       </script>
+        <script type="text/javascript" >
+            /*
+                一、直接写在选项里的模板，但是如果模板html代码太多，不建议这么写。
+                二、写在<template>标签里的模板
+                三、写在<script>标签里的模板
+           */
+
+            var app = new Vue({
+               el:'#app',
+               data:{
+                   message:'hello word',
+               },
+               /* template:`//模板字符串
+                    <h1 style="color:red">我是选项模板</h1>
+               ` */
+               /* template:"#demo2" */
+               template:"#demo3"
+           })
+        </script>
+    </body>
+</html>

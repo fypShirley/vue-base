@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>2.实例方法</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+        <script type="text/javascript" src="../assets/js/jQ2.3.js"></script>
+    </head>
+    <body>
+            
+        <h3>2.实例方法</h1>
+
+        <hr>
+        <div id="app">
+            {{message}}
+        </div>
+        <p><button onclick="destroy()">卸载</button></p>
+        <p><button onclick="reload()">刷新</button></p>
+        <p><button onclick="tick()">更改数据</button></p>
+        <script type="text/javascript" >
+
+        /* 一、$mount方法 */
+
+
+           var fyp = Vue.extend({
+               template:`<p>{{message}}</p>`,
+               data:function(){
+                   return {
+                       message:'你好，我是shirley'
+                   }
+               },
+               mounted:function(){
+                   console.log('我是mount')/* 生命周期 */
+                },
+                destroyed:function(){
+                    console.log('销毁之后')
+                },
+                updated:function(){
+                    console.log('更新之后')
+                }
+           });
+           var vm = new fyp().$mount('#app');
+
+           /* 二、$destroy() 卸载方法 */
+           function destroy(){
+                vm.$destroy();
+            }
+
+            /* 三、$forceUpdate() 更新方法 */
+            function reload(){
+                vm.$forceUpdate()
+            }
+
+            /* 
+            四、$nextTick() 数据修改方法
+                当Vue构造器里的data值被修改完成后会调用这个方法，也相当于一个钩子函数吧，
+                和构造器里的updated生命周期很像。
+             */
+        
+            function tick(){
+                vm.message="更新 message 信息 ";
+                vm.$nextTick(function(){/* 回调函数 */
+                    console.log('message更新后，我被调用了');
+                })
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>propsData_Option全局扩展的数据传递</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <h3>propsData Option Demo</h3>
+        <hr>
+
+       <header></header>
+       
+        <script type="text/javascript" >
+            /**
+             *  propsData 不是和属性有关，他用在全局扩展时进行传递数据。 
+             * 
+             * 不推荐用全局扩展的方式作自定义标签，我们学了组件，
+             * 完全可以使用组件来做，这里只是为了演示propsData的用法。
+             * */
+          /*   var header_a = Vue.extend({
+                template:`<p>{{message}}</p>`,
+                data:function(){
+                    return {
+                        message:'hello, 我是header'
+                    }
+                }
+            });
+            new header_a().$mount('header'); */
+
+            /* 
+                扩展标签已经做好了，这时我们要在挂载时传递一个数字过去，
+                我们就用到了propsData。 
+            */
+            var header_a = Vue.extend({
+                template:`<p>{{message}} {{a}}</p>`,
+                data:function(){
+                    return {
+                        message:'hello, 我是header'
+                    }
+                },
+                props:['a']
+            });
+            new header_a({propsData:{a:12}}).$mount('header');
+        </script>
+    </body>
+</html>

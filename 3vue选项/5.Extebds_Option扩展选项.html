@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>5.Extebds_Option扩展选项</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <h3>5.Extebds_Option扩展选项</h3>
+        <hr>
+
+       <div id="app">
+            <p>数量：{{num}}</p>
+            <p><button @click="add">增加数量</button></p>
+
+            delimiters：
+            <p>${message}</p>
+            <p>{{message}}</p>
+       </div>
+      
+        <script type="text/javascript" >
+            /**
+
+             */
+            var extendsObj = {
+                updated:function(){
+                    console.log('我是扩展的updated')
+                }
+            }
+
+            var bbb={
+                created:function(){
+                    console.log("我是被扩展出来的");
+                },
+                methods:{
+                    add:function(){/* 重名，只执行原生的 */
+                        console.log('我是被扩展出来的方法！');
+                    }
+                }
+            };
+             var app = new Vue({
+               el:'#app',
+               data:{
+                    num:1,
+                    message:'写法不同'
+               },
+               methods:{
+                   add:function(){
+                       this.num++;console.log('我是原生的add')
+                   }
+               },
+               updated:function(){
+                    console.log('3：构造器里的updated方法')
+               },
+               /* extends:extendsObj */
+               extends:bbb,/* 只能放对象 */
+               delimiters:['${','}']
+               
+           })
+           
+
+        </script>
+    </body>
+</html>

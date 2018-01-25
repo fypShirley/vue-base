@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>8.componts标签</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <h1>8.componts标签</h1>
+        <hr>
+       <div id="app"> 
+           <component v-bind:is="who"></component>
+           <button @click="changeCom">改变组件</button>
+       </div>
+       
+    
+        <script type="text/javascript" >
+        
+            
+            var comA = {
+                template:`<div style="color:red;">componten A</div>`
+            }
+            var comB = {
+                template:`<div style="color:green;">componten B</div>`
+            }
+            var comC = {
+                template:`<div style="color:pink;">componten C</div>`
+            }
+
+
+         
+           
+            var app = new Vue({
+               el:'#app',
+               data:{
+                   who:'comA'
+               },
+               components:{
+                   "comA":comA,
+                   "comB":comB,
+                   "comC":comC,
+               },
+               methods:{
+                   changeCom:function(){
+                       if(this.who == "comA"){
+                        this.who = "comB"
+                       }else if(this.who == "comB"){
+                        this.who = "comC"
+                       }else{
+                        this.who = "comA"
+                       }
+                   }
+               }
+            });
+          
+           
+        </script>
+    </body>
+</html>

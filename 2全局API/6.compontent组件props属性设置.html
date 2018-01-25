@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>compontent组件prop属性设置</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <h1>compontent组件prop属性设置</h1>
+        <hr>
+       <div id="app"> 
+            <school here="china"></school>
+            	
+            <panda from-here="China"></panda>
+
+            <home v-bind:here="message"></home>
+       </div>
+       
+    
+        <script type="text/javascript" >
+            var app = new Vue({
+               el:'#app',
+               data:{
+                   message:'china'
+               },
+               components:{
+                   /* 一、定义属性并获取属性值 */
+                    /* 'school':{
+                        template:'<div style="color:red;">school is {{here}}</div>',
+                        props:['here']
+                    }, */
+                    /* 二、属性中带’-‘的处理方式  注意：因为这里有坑，所以还是少用-为好。 */
+                    /* "panda":{
+                        template:`<div style="color:red;">Panda from {{ here }}.</div>`,
+                        props:['fromHere']
+                    }, */
+
+                    /* 三、在构造器里向组件中传值 */
+                    "home":{
+                        template:`<div style="color:red;">Panda from {{ here }}.</div>`,
+                        props:['here']
+                    },
+
+               }
+           })
+          
+           
+        </script>
+    </body>
+</html>

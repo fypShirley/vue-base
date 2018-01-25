@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-操作符</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{message}}
+            <hr>
+            <!-- v-if:是vue 的一个内部指令，指令用在我们的html中。 -->
+            <!-- v-if用来判断是否加载html的DOM，比如我们模拟一个用户登录状态，在用户登录后现实用户名称。 -->
+            <div v-if="isLogin">v-if为真，显示:你好</div>
+            <div v-else>v-if为假，不显示</div>
+            <hr>
+
+            <!-- 调整css中display属性，DOM已经加载，只是CSS控制没有显示出来。 -->
+            <div v-show="isShow">v-show为真，显示</div>
+            <hr>
+
+            <!-- v-for指令是循环渲染一组data中的数组，v-for 指令需要以 item in items 形式的特殊语法，
+                items 是源数据数组并且item是数组元素迭代的别名。 -->
+            <span>v-for:</span>
+            <ul>
+                <li v-for="item in items">{{item}}</li>
+            </ul>
+            <span>排序：:[53,23,78,14,54,36,28]</span><br>
+            <span>改成:[53,23,7,14,54,36,28]  -> 14 23 28 36 53 54 7 存在问题 自己写一个函数传入sort</span>
+            <ul>
+                <li v-for="item in sortItems">{{item}}</li>
+            </ul>
+
+            <span>对象循环输出</span>
+            <ul>
+                    <li v-for="(stu,index) in students">
+                       {{index}} : {{stu.name}} - {{stu.age}}
+                    </li>
+                </ul>
+            <ul>
+                <li v-for="(stu,index) in sortStu">
+                   {{index}} : {{stu.name}} - {{stu.age}}
+                </li>
+            </ul>
+            <hr>
+
+            <!-- 
+                我们已经用的是{{xxx}},这种情况是有弊端的，就是当我们网速很慢或者javascript出错时，会暴露我们的{{xxx}}。
+                Vue给我们提供的v-text,就是解决这个问题的:
+                <span>{{message}}</span> => <span v-text="message"></span>
+            -->
+            <!-- 
+                双大括号会将数据解释为纯文本，而非HTML。为了输出真正的HTML，你就需要使用v-html 指令。
+                注意：
+                    在生产环境中动态渲染HTML是非常危险的，因为容易导致XSS攻击。所以只能在可信的内容上使用v-html，
+                    永远不要在用户提交和可操作的网页上使用。
+            -->
+            <span>v-text  && v-html</span><br><br>
+
+            <span>{{msgText}}</span> 等同于 <span v-text="msgText"></span><br>
+            <span v-html="msgHtml"></span>
+            <hr>
+
+
+            <!-- v-on 就是监听事件，可以用v-on指令监听DOM事件来触发一些javascript代码。 -->
+            <span>v-on事件监听器:</span><br><br>
+            分数：{{count}} <br>
+            <button v-on:click="jiafen">加分</button><!-- 完整写法 -->
+            <button @click="jianfen">减分</button><!-- 缩写 -->
+
+            <br>
+            <span>v-on:keyup.enter</span><br>
+            <input type="text" v-on:keyup.enter="onEnter" v-model = "fenshu">
+            <!-- 键盘码 -->
+            <input type="text" v-on:keyup.enter.13="onEnter" v-model = "fenshu">
+
+            
+        </div>
+        
+
+    
+        <script type="text/javascript" >
+           var app = new Vue({
+               el:'#app',
+               data:{
+                   message:'v-操作符',
+                   isLogin:false,/* v-if */
+                   isShow:true,/* v-show */
+                   items:[53,23,7,14,54,36,28],/* v-for */
+                   students:[
+                        {name:'jspang',age:32},
+                        {name:'Panda',age:30},
+                        {name:'PanPaN',age:21},
+                        {name:'King',age:45}
+                    ],
+                    msgText:'<h2>v-text</h2>',/* v-text */
+                    msgHtml:'<h2>v-html</h2>',/* v-html */
+                    count:1/* v-on */,
+                    fenshu:1,
+               },
+               methods:{
+                   jiafen:function(){
+                       this.count++
+                   },
+                   jianfen:function(){
+                       this.count--;
+                   }
+               },
+               computed:{
+                   sortItems:function(){
+                       return this.items.sort(sortNumber1);
+                   },
+                   sortStu:function(){
+                       return this.students.sort(sortNumber2);
+                   },
+                   onEnter:function(){
+                       this.count = this.count+parseInt(this.fenshu)
+                   }
+               }
+           })
+           function sortNumber1(a,b){
+               return a-b;
+           }
+           function sortNumber2(a,b){
+               return a.age-b.age;
+           }
+           function sortByKey(array,key){
+                return array.sort(function(a,b){
+                    var x=a[key];
+                    var y=b[key];
+                    return ((x<y)?-1:((x>y)?1:0));
+                });
+           }
+        </script>
+    </body>
+</html>

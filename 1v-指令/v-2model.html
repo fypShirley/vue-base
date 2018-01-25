@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-操作符</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+           原始文本信息：{{message}}
+
+           <h3>文本框</h3>
+                <p>
+                    v-model:
+                    <input type="text" v-model="message">
+                </p>
+                <p>
+                    v-model.lazy:<!-- 取代 imput 监听 change 事件。 -->
+                    <input type="text" v-model.lazy="message">
+                </p>
+                <p>
+                    v-model.number:<!-- 输入字符串转为数字。。 -->
+                    <input type="text" v-model.number="message">
+                </p>
+                <p>
+                    v-model.trim:<!-- 输入字符串转为数字。。 -->
+                    <input type="text" v-model.trim="message">
+                </p>
+
+
+            <h3>文本域</h3>
+                <textarea name="" id="" cols="30" rows="10" v-model="message"></textarea>
+          
+            <h3>多选按钮绑定一个值</h3>
+                <input id="isTrue" type="checkbox" v-model="isTrue">
+                <label for="isTrue">{{isTrue}}</label>
+
+            <h3>多选绑定一个数组</h3>
+                <p>
+                    <input id="name1" type="checkbox" value="name1" v-model="Wname">
+                    <label for="name1">name1</label>
+                    <input id="name2" type="checkbox" value="name2" v-model="Wname">
+                    <label for="name2">name2</label>
+                    <input id="name3" type="checkbox" value="name3" v-model="Wname">
+                    <label for="name3">name3</label>
+                    <br>
+                    nameArr:{{Wname}}
+                </p>
+
+            <h3>单选按钮绑定数据</h3>
+                <input id="name3" type="radio" id="one" value="男" v-model="sex">
+                <label for="one">男</label>
+                <input id="name3" type="radio" id="two" value="女" v-model="sex">
+                <label for="one">女</label>
+                <br>
+                <p>你选择的：{{sex}}</p>
+        </div>
+        
+
+    
+        <script type="text/javascript" >
+           var app = new Vue({
+               el:'#app',
+               data:{
+                   message:'v-model',
+                    isTrue:true,/* v-model */
+                    Wname:[],/* v-model */
+                    sex:'',
+               },
+               methods:{
+                  
+               },
+               computed:{
+                  
+               }
+           })
+          
+        </script>
+    </body>
+</html>

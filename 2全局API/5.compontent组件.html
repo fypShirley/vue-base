@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>compontent组件</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <h1>compontent组件</h1>
+        <hr>
+       <div id="app"> 
+           <fyp></fyp>
+           <fyp2></fyp2>
+
+       </div>
+       
+    
+        <script type="text/javascript" >
+            /*
+                一、全局化注册组件      
+           */
+
+           Vue.component('fyp',{
+               template:'<div style="color:red;">全局化注册的fyp标签</div>'
+           })
+            var app = new Vue({
+               el:'#app',
+               /* 二、 局部注册组件局部注册组件和全局注册组件是向对应的，
+               局部注册的组件只能在组件注册的作用域里进行使用，
+               其他作用域使用无效。 */
+               components:{
+                    'fyp2':{
+                        template:'<div style="color:red;">局部注册的fyp标签</div>'
+                    }
+               }
+           })
+          
+           
+        </script>
+    </body>
+</html>

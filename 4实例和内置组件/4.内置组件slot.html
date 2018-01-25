@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>4.内置组件slot</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+        <script type="text/javascript" src="../assets/js/jQ2.3.js"></script>
+    </head>
+    <body>
+            
+        <h3>4.内置组件slot</h1>
+
+        <hr>
+        <div id="app">
+            <!-- slot的使用需要两步： -->
+
+            <shirley>
+                <!-- 1、在HTML的组件中用slot属性传递值 -->
+                <span slot="url">{{info.url}}</span><!-- KEY:url, -->
+                <span slot="name">fyp</span><!--不用插值的 -->
+                <span slot="skill">{{info.skill}}</span><!-- KEY:url, -->
+            </shirley>
+            
+        </div>
+        
+        <!-- 2、在组件模板中用<slot></slot>标签接收值。 成对出现 -->
+        <template id="tmp">
+            <div>
+                <p>博客地址：<slot name="url"></slot></p>
+                <p>网名：<slot name="name"></slot></p>
+                <p>技术类型：<slot name="skill"></slot></p>
+                
+            </div>
+        </template>
+
+        <script type="text/javascript" >
+
+        /**
+         * 实例事件就是在构造器外部写一个调用构造器内部的方法。
+         * 这样写的好处是可以通过这种写法在构造器外部调用构造器内部的数据。
+         */
+
+        
+         var  shirley   = {
+             template : "#tmp"
+         }
+
+         var app = new Vue({
+            el:'#app',
+            data:{
+                info:{
+                    url:'/4实例和内置组件/4.内置组件slot.html',
+                    name:'shirley',
+                    skill:'web前端'
+                }
+            },
+            components:{
+                'shirley':shirley
+            },
+           
+        })
+       
+        </script>
+    </body>
+</html>

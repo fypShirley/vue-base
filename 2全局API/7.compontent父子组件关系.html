@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>7.compontent父子组件关系.1</title>
+        <script type="text/javascript" src="../assets/js/vue.js"></script>
+    </head>
+    <body>
+        <h1>7.compontent父子组件关系.1</h1>
+        <hr>
+       <div id="app"> 
+            <panda></panda>   
+            <parent_com></parent_com><!--不可以写驼峰式：parentCom 不可以写横线连接：parent-com -->
+        
+       </div>
+       
+    
+        <script type="text/javascript" >
+            /* 一、构造器外部写局部注册组件
+            
+            我们把组件编写的代码放到构造器外部或者说单独文件。
+            */
+            
+            var panda = {
+                template:`<div>局部注册组件</div>`
+            }
+
+
+            /* 二、父子组件的嵌套 */
+            var chid = {
+                template:`<div style="color:green">子组件</div>`
+            }
+            var parent_com = {
+                template:`<div><p> 父级组件<chid></chid> </p> </div>`,
+                components:{
+                    "chid":chid,
+                }
+            }
+            
+
+
+           
+            var app = new Vue({
+               el:'#app',
+               components:{
+                    'panda':panda,
+                    "parent_com":parent_com,
+                
+               }
+            });
+          
+           
+        </script>
+    </body>
+</html>
